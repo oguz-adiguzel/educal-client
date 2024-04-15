@@ -9,7 +9,7 @@ const InfoSection = () => {
   const getCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/categories/getCategories"
+        "https://educal-api.onrender.com/getCategories"
       );
       setCategies(response.data.categories);
     } catch (error) {

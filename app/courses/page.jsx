@@ -14,7 +14,7 @@ const page = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/courses");
+      const response = await axios.get("https://educal-api.onrender.com/courses");
       setData(response.data)
     } catch (error) {
       console.log("error", error);

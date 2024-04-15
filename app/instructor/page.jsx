@@ -13,7 +13,7 @@ const page = () => {
 
   const getTeacher = async() =>{
     try{
-      const response = await axios.get('http://localhost:3001/users/getTeacherList')
+      const response = await axios.get('https://educal-api.onrender.com/users/getTeacherList')
       setTeacherList(response.data.teacher)
     }catch(error){
       console.log('error', error);

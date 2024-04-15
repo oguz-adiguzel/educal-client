@@ -38,7 +38,7 @@ const page = () => {
   const getUserData = async () => {
     const token = await localStorage.getItem("tokenKey");
     try {
-      const response = await axios.get("http://localhost:3001/users/profile", {
+      const response = await axios.get("https://educal-api.onrender.com/users/profile", {
         headers: {
           Authorization: token,
         },
@@ -58,7 +58,7 @@ const page = () => {
   const getCategory = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/categories/getCategories"
+        "https://educal-api.onrender.com/getCategories"
       );
       setCateries(response.data.categories);
     } catch (error) {
@@ -77,7 +77,7 @@ const page = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/courses",
+        "https://educal-api.onrender.com/courses",
         formData
       );
       toast.success(response.data.message, {
@@ -155,7 +155,7 @@ const page = () => {
         for (let index = 0; index < studentCourseId.length; index++) {
           const id = studentCourseId[index];
           const response = await axios.post(
-            "http://localhost:3001/users/getstudentCourses",
+            "https://educal-api.onrender.com/getstudentCourses",
             {
               id: id,
             }
@@ -202,7 +202,7 @@ const page = () => {
 
 const updateUser = async() =>{
   try{
-    const response = await axios.put('http://localhost:3001/users/update',{
+    const response = await axios.put('https://educal-api.onrender.com/users/update',{
       id: userData._id,
       name: userName,
       age: date,

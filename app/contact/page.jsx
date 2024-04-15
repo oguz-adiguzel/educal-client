@@ -12,7 +12,7 @@ const page = () => {
 
   const sendMail = async() => {
     try{
-      const response = await axios.post('http://localhost:3001/contact', {
+      const response = await axios.post('https://educal-api.onrender.com/contact', {
         name:name,
         email:email,
         message:message

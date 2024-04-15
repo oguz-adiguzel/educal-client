@@ -22,7 +22,7 @@ const page = () => {
   const login = async () => {
 
     try {
-      const response = await axios.post("http://localhost:3001/users/login", {
+      const response = await axios.post("https://educal-api.onrender.com/users/login", {
         email: email,
         password: password,
       });

@@ -41,7 +41,7 @@ const page = () => {
   const getCourse = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/courses/${params.slug[0]}`
+        `https://educal-api.onrender.com/courses/${params.slug[0]}`
       );
       setData(response.data);
     } catch (error) {
@@ -64,7 +64,7 @@ const page = () => {
     const token = await localStorage.getItem("tokenKey");
     try {
       const response = await axios.get(
-        "http://localhost:3001/users/getTeacherCourses",
+        "https://educal-api.onrender.com/users/getTeacherCourses",
         {
           headers: {
             Authorization: token,
@@ -82,7 +82,7 @@ const page = () => {
   const enrollCourse = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/courses/enroll",
+        "https://educal-api.onrender.com/courses/enroll",
         {
           userID: userData._id,
           courseID: data.course._id,
@@ -109,7 +109,7 @@ const page = () => {
   const releaseCourse = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/courses/release",
+        "https://educal-api.onrender.com/courses/release",
         {
           userID: userData._id,
           courseID: data.course._id,
@@ -136,7 +136,7 @@ const page = () => {
   const deleteCourse = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/courses/${params.slug[0]}`
+        `https://educal-api.onrender.com/courses/${params.slug[0]}`
       );
       toast.success(response.data.message, {
         position: "top-right",
@@ -189,7 +189,7 @@ const page = () => {
       const userData = await JSON.parse(localStorage.getItem("userData"));
       try {
         const response = await axios.post(
-          "http://localhost:3001/courses/comment",
+          "https://educal-api.onrender.com/courses/comment",
           {
             id: data.course._id,
             userName: userData.name,

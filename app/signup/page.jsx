@@ -24,7 +24,7 @@ const page = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/users/signup",
+        "https://educal-api.onrender.com/users/signup",
         formData
       );
 

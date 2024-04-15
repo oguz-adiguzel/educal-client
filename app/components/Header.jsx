@@ -132,7 +132,7 @@ const Header = () => {
 
   const getCategories = async() =>{
     try{
-      const response = await axios.get('http://localhost:3001/categories/getCategories')
+      const response = await axios.get('https://educal-api.onrender.com/categories/getCategories')
       setCategoryData(response.data.categories)
     }catch(error){
       console.log('error', error);
