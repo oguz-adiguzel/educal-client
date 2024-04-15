@@ -19,6 +19,7 @@ import { AiOutlineFileText } from "react-icons/ai";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { toast } from "react-toastify";
 import YouTube from "react-youtube";
+import Cookies from "js-cookie";
 
 const page = () => {
   // const data = coursesData;
@@ -30,9 +31,12 @@ const page = () => {
   const [comment, setComment] = useState();
   const [raiting, setRaiting] = useState()
   const [averageRaiting, setAverageRaiting] = useState()
-  const token = localStorage.getItem("tokenKey");
-  const role = localStorage.getItem("role");
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  // const token = localStorage.getItem("tokenKey");
+  const token = Cookies.get("tokenKey")
+  // const role = localStorage.getItem("role");
+  const role = Cookies.get("role")
+  // const userData = JSON.parse(localStorage.getItem("userData"));
+  const userData = JSON.parse(Cookies.get("userData"))
   const params = useParams();
   const router = useRouter();
 
@@ -61,7 +65,8 @@ const page = () => {
   }, []);
 
   const getStudentCourse = async () => {
-    const token = await localStorage.getItem("tokenKey");
+    // const token = await localStorage.getItem("tokenKey");
+    const token = await Cookies.get("tokenKey")
     try {
       const response = await axios.get(
         "https://educal-api.onrender.com/users/getTeacherCourses",
@@ -183,10 +188,12 @@ const page = () => {
   };
 
   const createComment = async () => {
-    const token = localStorage.getItem('tokenKey')
+    // const token = localStorage.getItem('tokenKey')
+    const token = Cookies.get("tokenKey")
 
     if(token){
-      const userData = await JSON.parse(localStorage.getItem("userData"));
+      // const userData = await JSON.parse(localStorage.getItem("userData"));
+      const userData = await JSON.parse(Cookies.get("userData"))
       try {
         const response = await axios.post(
           "https://educal-api.onrender.com/courses/comment",

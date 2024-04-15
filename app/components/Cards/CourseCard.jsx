@@ -10,7 +10,7 @@ const CourseCard = ({ item, categories, teacher, teacherPhoto }) => {
   const router = useRouter();
   
   const getCategory = () => {
-    let a = categories.find((cat) => cat._id === item?.category);
+    let a = categories?.find((cat) => cat._id === item?.category);
     return a?.name;
   };
 

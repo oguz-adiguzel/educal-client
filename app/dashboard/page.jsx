@@ -11,6 +11,7 @@ import { CiImageOn } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import CourseCard from "../components/Cards/CourseCard";
+import Cookies from "js-cookie";
 
 const page = () => {
   const [userData, setUserData] = useState();
@@ -31,12 +32,14 @@ const page = () => {
   const [categories, setCateries] = useState();
   const [id, setId] = useState();
   const [age, setAge] = useState()
-  const role = localStorage.getItem("role");
+  // const role = localStorage.getItem("role");
+  const role = Cookies.get("role")
 
   useAuth();
 
   const getUserData = async () => {
-    const token = await localStorage.getItem("tokenKey");
+    // const token = await localStorage.getItem("tokenKey");
+    const token = await Cookies.get("tokenKey")
     try {
       const response = await axios.get("https://educal-api.onrender.com/users/profile", {
         headers: {
@@ -58,7 +61,7 @@ const page = () => {
   const getCategory = async () => {
     try {
       const response = await axios.get(
-        "https://educal-api.onrender.com/getCategories"
+        "https://educal-api.onrender.com/categories/getCategories"
       );
       setCateries(response.data.categories);
     } catch (error) {
@@ -155,7 +158,7 @@ const page = () => {
         for (let index = 0; index < studentCourseId.length; index++) {
           const id = studentCourseId[index];
           const response = await axios.post(
-            "https://educal-api.onrender.com/getstudentCourses",
+            "https://educal-api.onrender.com/users/getStudentCourses",
             {
               id: id,
             }
@@ -183,6 +186,7 @@ const page = () => {
       // Eğer id daha önce görülmüşse, bu nesneyi sonuca dahil etmeyin
       return false;
     });
+    console.log('sonuc', sonuc);
     return sonuc;
   };
 
@@ -456,8 +460,8 @@ useEffect(() => {
                 key={index}
                 item={item}
                 categories={categories}
-                teacher={userData.name}
-                teacherPhoto={userData.photoUrl}
+                // teacher={userData.name}
+                // teacherPhoto={userData.photoUrl}
               />
             ))}
         </div>

@@ -8,6 +8,7 @@ import { BsPlus } from "react-icons/bs";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import axios from "axios"
+import Cookies from 'js-cookie';
 
 const Header = () => {
   const router = useRouter();
@@ -86,7 +87,9 @@ const Header = () => {
   const [mobileToggle, setMobileToggle] = useState(false);
   const [categoryData, setCategoryData] = useState()
 
-  const token = localStorage.getItem("tokenKey");
+  // const token = localStorage.getItem("tokenKey");
+
+  const token = Cookies.get('tokenKey')
 
   useEffect(() => {
     const handleWheelDisable = (e) => {
@@ -114,9 +117,12 @@ const Header = () => {
   const path = usePathname();
 
   const logOut = () => {
-    localStorage.removeItem("tokenKey");
-    localStorage.removeItem("role");
-    localStorage.removeItem("userData");
+    // localStorage.removeItem("tokenKey");
+    Cookies.remove("tokenKey")
+    // localStorage.removeItem("role");
+    Cookies.remove("role")
+    // localStorage.removeItem("userData");
+    Cookies.remove("userData")
     router.push("/signin");
     toast.warn("Çıkış yapıldı", {
       position: "top-right",

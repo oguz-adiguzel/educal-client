@@ -4,12 +4,14 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { CiMail, CiLock } from "react-icons/ci";
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('tokenKey');
+    // const token = localStorage.getItem('tokenKey');
+    const token = Cookies.get("tokenKey")
 
     if (token) {
       router.push('/');
@@ -28,9 +30,12 @@ const page = () => {
       });
 
       if(response){
-        localStorage.setItem('tokenKey', response.data.token)
-        localStorage.setItem('role', response.data.role)
-        localStorage.setItem('userData', JSON.stringify(response.data.user))
+        Cookies.set('tokenKey', response.data.token)
+        Cookies.set('role', response.data.role)
+        Cookies.set('userData', JSON.stringify(response.data.user))
+        // localStorage.setItem('tokenKey', response.data.token)
+        // localStorage.setItem('role', response.data.role)
+        // localStorage.setItem('userData', JSON.stringify(response.data.user))
         toast.success(response.data.message, {
           position: "top-right",
           autoClose: 3000,
