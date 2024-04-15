@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-color: #edeef3;
+}
+
+.info-1{
+  background-image: url('../public/info-1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.info-2{
+  background-image: url('../public/info-2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.event{
+  background-image: url('../public/events-shape.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+}
+.start-card{
+  background-image: url('../public/start-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.courses-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/page-title-2.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.contact-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/page-contact-title.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.teacher-detail{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/teacher-detail.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 25%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.signup-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/signup-bg.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 60%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/login-bg.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashboard-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/dashboard.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.courseDetail-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/courseDetail-bg.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.element {
+  animation: cssAnimation_0 5000ms infinite ease-in-out;
+}
+
+@keyframes cssAnimation_0 {
+  0% {
+		transform: translateY(0);
+	}
+
+  50%{
+    transform: translateY(-100px);
+  }
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.pages-link{
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  overflow: hidden; /* İçeriğin kutu dışına taşmasını engellemek için */
+  position: relative; /* Mutlak konumlandırma için */
+}
+.pages-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%; /* Başlangıçta kutunun dışında */
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  transition: left 0.5s ease; /* Geçiş efekti için */
+}
+.pages-link:hover::before {
+  left: 0%; /* Kutunun içine gelene kadar */
+  transition: left 0.5s ease; /* Geçiş efekti için */
+}
+/* .deneme:hover{
+  background-color: blue;
+} */
+
+.about-section{
+  background-image: url('../public/about-section.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes cssAnimation_1 {
+  0% {
+		width: 0%;
+  /* background-color: blue; */
+
+	}
+
+	100% {
+		width: 100%;
+  /* background-color: blue; */
+
+	}
+}
+
+@keyframes cssAnimation_2 {
+  0% {
+		width: 100%;
+  /* background-color: white; */
+
+	}
+
+	100% {
+		width: 0%;
+  /* background-color: white; */
+
+	}
+}
