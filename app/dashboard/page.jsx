@@ -242,7 +242,7 @@ useEffect(() => {
     <div className="w-full">
       {userModal && (
         <div className="w-full h-screen bg-[#000000c9] absolute z-10 flex justify-center items-center">
-          <div className="w-1/2 mx-auto py-20 bg-white rounded-md relative">
+          <div className="w-full lg:w-1/2 mx-auto py-20 bg-white rounded-md relative">
             <div
               onClick={() => setUserModal(false)}
               className="absolute top-5 right-5 cursor-pointer"
@@ -302,7 +302,7 @@ useEffect(() => {
       )}
       {modal && (
         <div className="w-full h-screen bg-[#000000c9] absolute z-10 flex justify-center items-center">
-          <div className="w-1/2 mx-auto py-20 bg-white rounded-md relative">
+          <div className="w-full lg:w-1/2 mx-auto py-40 lg:py-20 bg-white rounded-md relative">
             <div
               onClick={() => setModal(!modal)}
               className="absolute top-5 right-5 cursor-pointer"
@@ -390,7 +390,7 @@ useEffect(() => {
           <p className="text-white mt-2">Home . Dashboard</p>
         </div>
       </div>
-      <div className="w-1/2 mx-auto bg-white my-10 border rounded-lg py-14 px-20 relative">
+      <div className="w-full lg:w-1/2 mx-auto bg-white my-10 border rounded-lg py-14 lg:px-20 relative">
         <div
           onClick={() => openUserModal()}
           className="absolute right-8 top-8 cursor-pointer"
@@ -444,7 +444,7 @@ useEffect(() => {
             </button>
           )}
         </div>
-        <div className="w-full px-36 mt-10 grid grid-cols-3 gap-10">
+        <div className="w-full lg:px-36 mt-10 grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-3 gap-10">
           {userCourses?.map((item, index) => (
             <CourseCard
               key={index}

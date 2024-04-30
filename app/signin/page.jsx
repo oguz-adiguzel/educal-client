@@ -67,8 +67,8 @@ const page = () => {
       <title>Educal - Instructor</title>
       <div className="w-full login-title flex items-center">
         <div className="container mx-auto">
-          <h1 className="text-white text-6xl font-bold mt-2">Login Account</h1>
-          <p className="text-white mt-2">Home . Signin</p>
+          <h1 className="text-white pl-5 lg:pl-0 text-6xl font-bold mt-2">Login Account</h1>
+          <p className="text-white mt-2 pl-5 lg:pl-0 ">Home . Signin</p>
         </div>
       </div>
       <p className="text-center font-bold text-4xl mt-16">Sign In To</p>
@@ -77,16 +77,16 @@ const page = () => {
         it you don't have an account you can Register here!
       </p>
       <div className="w-full relative">
-        <img className="absolute top-60 left-96" src="man-3.png" />
-        <img className="absolute top-60 right-96" src="man-2.png" />
-        <img className="absolute -z-10 left-1/3 -top-10" src="sign-up.png" />
+        <img className="absolute hidden lg:block top-60 left-96 " src="man-3.png" />
+        <img className="absolute top-60 right-96 hidden lg:block" src="man-2.png" />
+        <img className="absolute lg:-z-10 lg:left-1/3 lg:-top-10 " src="sign-up.png" />
       </div>
-      <div className="w-[30%] mt-12 mb-20 rounded-md shadow-md mx-auto py-16 bg-white relative">
-        <img className="absolute bottom-40 -right-32" src="flower.png" />
-        <img className="absolute -right-24 animate-spin" src="circle.png" />
-        <img className="absolute top-10 -right-10 element" src="dot.png" />
+      <div className="w-[90%] lg:w-[30%] mt-12 mb-20 rounded-md shadow-md mx-auto py-16 bg-white relative">
+        <img className="absolute bottom-40 -right-32 hidden lg:block" src="flower.png" />
+        <img className="absolute -right-24 animate-spin  hidden lg:block" src="circle.png" />
+        <img className="absolute top-10 -right-10 element  hidden lg:block" src="dot.png" />
         <img
-          className="absolute top-20 -left-32 animate-bounce"
+          className="absolute hidden lg:block top-20 -left-32 animate-bounce "
           src="zigzag.png"
         />
         <div className="w-2/3 mx-auto mt-8">

@@ -25,7 +25,7 @@ const CoursesSection = () => {
   return (
     <div className="w-full py-20 lg:py-32">
       <div className="w-full lg:container mx-auto px-3 lg:px-32">
-        <div className="flex flex-col lg:flex-row justify-between items-end">
+        <div className="flex flex-col lg:flex-row justify-between lg:items-end">
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold">Find The Right</h2>
             <h2 className="text-3xl lg:text-4xl font-bold">
@@ -37,7 +37,7 @@ const CoursesSection = () => {
             </p>
           </div>
           <div className="px-0 lg:px-5 mt-8 lg:mt-0">
-            <ul className="flex space-x-3 lg:space-x-8 text-sm">
+            <ul className="grid grid-cols-4 gap-4 lg:flex lg:space-x-8 text-sm">
               <li onClick={()=> setCatFilter(undefined)} className={`${catFilter === undefined ? 'text-blue-500' : 'text-gray-600'} font-semibold cursor-pointer`}>See All</li>
               {data?.categories.map((item, index) => (
                 <li

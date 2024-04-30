@@ -29,18 +29,19 @@ const page = () => {
   const [find, setFind] = useState(false);
   const [title, setTitle] = useState();
   const [comment, setComment] = useState();
-  const [raiting, setRaiting] = useState()
-  const [averageRaiting, setAverageRaiting] = useState()
+  const [raiting, setRaiting] = useState();
+  const [averageRaiting, setAverageRaiting] = useState();
   // const token = localStorage.getItem("tokenKey");
-  const token = Cookies.get("tokenKey")
+  const token = Cookies.get("tokenKey");
   // const role = localStorage.getItem("role");
-  const role = Cookies.get("role")
+  const role = Cookies.get("role");
   // const userData = JSON.parse(localStorage.getItem("userData"));
-  const userData = JSON.parse(Cookies.get("userData"))
+  const cookieUserData = Cookies.get("userData");
+  const userData = cookieUserData ? JSON.parse(cookieUserData) : null;
   const params = useParams();
   const router = useRouter();
 
-  const onPointerMove = (value, index) => setRaiting(value)
+  const onPointerMove = (value, index) => setRaiting(value);
 
   const getCourse = async () => {
     try {
@@ -66,7 +67,7 @@ const page = () => {
 
   const getStudentCourse = async () => {
     // const token = await localStorage.getItem("tokenKey");
-    const token = await Cookies.get("tokenKey")
+    const token = await Cookies.get("tokenKey");
     try {
       const response = await axios.get(
         "https://educal-api.onrender.com/users/getTeacherCourses",
@@ -189,11 +190,11 @@ const page = () => {
 
   const createComment = async () => {
     // const token = localStorage.getItem('tokenKey')
-    const token = Cookies.get("tokenKey")
+    const token = Cookies.get("tokenKey");
 
-    if(token){
+    if (token) {
       // const userData = await JSON.parse(localStorage.getItem("userData"));
-      const userData = await JSON.parse(Cookies.get("userData"))
+      const userData = await JSON.parse(Cookies.get("userData"));
       try {
         const response = await axios.post(
           "https://educal-api.onrender.com/courses/comment",
@@ -203,7 +204,7 @@ const page = () => {
             userPhoto: userData.photoUrl,
             title: title,
             comment: comment,
-            raiting: raiting
+            raiting: raiting,
           }
         );
         toast.success(response.data.message, {
@@ -216,14 +217,14 @@ const page = () => {
           progress: undefined,
           theme: "light",
         });
-        setRaiting(0)
-        getCourse()
+        setRaiting(0);
+        getCourse();
         // raitingCount()
       } catch (error) {
         console.log("error", error);
       }
-    }else{
-      toast.warn('Lütfen Giriş Yapınız', {
+    } else {
+      toast.warn("Lütfen Giriş Yapınız", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -234,23 +235,22 @@ const page = () => {
         theme: "light",
       });
     }
-    
   };
 
-  const raitingCount = () =>{
-    let r = 0
+  const raitingCount = () => {
+    let r = 0;
     data?.course.comments.forEach((item) => {
-      const q = (item.raiting + r)
-      r = q
+      const q = item.raiting + r;
+      r = q;
     });
-    let average = r / (data?.course.comments.length)
-    setAverageRaiting(average)
-  }
+    let average = r / data?.course.comments.length;
+    setAverageRaiting(average);
+  };
 
   useEffect(() => {
-    raitingCount()
-  }, [data])
-  
+    raitingCount();
+  }, [data]);
+
   return (
     <div className="w-full">
       <title>Educal - Course</title>
@@ -260,7 +260,7 @@ const page = () => {
           <p className="text-white mt-2">Home . Course</p>
         </div>
       </div>
-      <div className="container my-16 px-20 mx-auto grid grid-cols-7 items-start gap-x-20">
+      <div className="container my-16 px-1 lg:px-20 mx-auto grid grid-cols-1 lg:grid-cols-7 items-start gap-x-20">
         <div className="col-span-5">
           <p className="text-xs text-gray-500 mb-8">
             Home . Courses . {data?.course?.name}
@@ -268,9 +268,11 @@ const page = () => {
           <span className="text-xs text-white bg-green-600 px-2 py-1 rounded-sm">
             {findCategory()}
           </span>
-          <p className="text-5xl font-bold pr-64 mt-5">{data?.course?.name}</p>
-          <div className="flex space-x-20 items-center mt-8">
-            <div className="flex items-center space-x-3">
+          <p className="text-5xl font-bold lg:pr-64 mt-5">
+            {data?.course?.name}
+          </p>
+          <div className="flex space-x-0 lg:space-x-20 items-start lg:items-center mt-8">
+            <div className="flex items-center space-x-1 lg:space-x-3">
               <div className="rounded-full border-2 w-12 h-12 border-blue-500">
                 <img
                   className="rounded-full w-full h-full object-cover"
@@ -299,48 +301,48 @@ const page = () => {
               </div>
             </div>
           </div>
-          <img className="mt-7 w-5/6" src={data?.course?.photoUrl} />
-          <div className="w-5/6 h-16 mt-5 bg-gray-300 grid grid-cols-4 rounded-l-md rounded-r-md">
+          <img className="mt-7 w-full lg:w-5/6" src={data?.course?.photoUrl} />
+          <div className="w-full lg:w-5/6 h-12 lg:h-16 mt-5 bg-gray-300 grid grid-cols-4 rounded-l-md rounded-r-md">
             <div
               onClick={() => setTab("discription")}
-              className={`border-r flex space-x-2 ${
+              className={`border-r text-xs lg:text-base flex space-x-0 lg:space-x-2 ${
                 tab === "discription" ? "bg-blue-600" : ""
               } ${
                 tab === "discription" ? "text-white" : ""
               } rounded-l-md justify-center items-center border-gray-400 cursor-pointer`}
             >
-              <IoBookmarkOutline size={20} />
+              <IoBookmarkOutline className="text-sm lg:text-lg" />
               <p>Discription</p>
             </div>
             <div
               onClick={() => setTab("curriculum")}
-              className={`border-r flex space-x-2 justify-center items-center border-gray-400 ${
+              className={`border-r text-xs lg:text-base flex space-x-0 lg:space-x-2 justify-center items-center border-gray-400 ${
                 tab === "curriculum" ? "bg-blue-600" : ""
               } ${tab === "curriculum" ? "text-white" : ""} cursor-pointer`}
             >
-              <PiBookThin size={20} />
+              <PiBookThin className="text-sm lg:text-lg" />
               <p>Curriculum</p>
             </div>
             <div
               onClick={() => setTab("reviews")}
-              className={`border-r flex space-x-2 justify-center items-center border-gray-400 ${
+              className={`border-r text-xs lg:text-base flex space-x-0 lg:space-x-2 justify-center items-center border-gray-400 ${
                 tab === "reviews" ? "bg-blue-600" : ""
               } ${tab === "reviews" ? "text-white" : ""} cursor-pointer`}
             >
-              <CiStar size={22} />
+              <CiStar className="text-sm lg:text-lg" />
               <p>Reviews</p>
             </div>
             <div
               onClick={() => setTab("members")}
-              className={`flex space-x-2 rounded-r-md justify-center items-center border-gray-400 ${
+              className={`text-xs lg:text-base flex space-x-0 lg:space-x-2 rounded-r-md justify-center items-center border-gray-400 ${
                 tab === "members" ? "bg-blue-600" : ""
               } ${tab === "members" ? "text-white" : ""} cursor-pointer`}
             >
-              <CiUser size={22} />
+              <CiUser className="text-sm lg:text-lg" />
               <p>Members</p>
             </div>
           </div>
-          <div className="w-5/6 py-5 px-6 mt-5 rounded-l-md rounded-r-md">
+          <div className="w-full lg:w-5/6 py-5 px-6 mt-5 rounded-l-md rounded-r-md">
             {tab === "discription" && (
               <>
                 {" "}
@@ -390,58 +392,58 @@ const page = () => {
                     style={{ border: "1px solid #c8cacc", borderRadius: "5px" }}
                     header="Week 01"
                   >
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <AiOutlineFileText />
                         <p className="font-bold ml-2">Reading :</p>
                         <p className="ml-1">Ut enim ad minim veniam</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>14 minutes</p>
                         </div>
-                        <p className="px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
+                        <p className="mt-3 lg:mt-0 px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
                           2 questions
                         </p>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <GoDeviceCameraVideo />
                         <p className="font-bold ml-2">Video :</p>
                         <p className="ml-1">Greetings and introduction</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>14 minutes</p>
                         </div>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <SlEarphones />
                         <p className="font-bold ml-2">Audio :</p>
                         <p className="ml-1">Interactive lesson</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>15 minutes</p>
                         </div>
-                        <p className="px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
+                        <p className="mt-3 lg:mt-0 px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
                           3 questions
                         </p>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <AiOutlineFileText />
                         <p className="font-bold ml-2">Reading :</p>
                         <p className="ml-1">Ut enim ad minim veniam</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>22 minutes</p>
@@ -455,58 +457,58 @@ const page = () => {
                     style={{ border: "1px solid #c8cacc", borderRadius: "5px" }}
                     header="Week 02"
                   >
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <AiOutlineFileText />
                         <p className="font-bold ml-2">Reading :</p>
                         <p className="ml-1">Ut enim ad minim veniam</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>14 minutes</p>
                         </div>
-                        <p className="px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
+                        <p className="mt-3 lg:mt-0 px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
                           2 questions
                         </p>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <GoDeviceCameraVideo />
                         <p className="font-bold ml-2">Video :</p>
                         <p className="ml-1">Greetings and introduction</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>14 minutes</p>
                         </div>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <SlEarphones />
                         <p className="font-bold ml-2">Audio :</p>
                         <p className="ml-1">Interactive lesson</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>15 minutes</p>
                         </div>
-                        <p className="px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
+                        <p className="mt-3 lg:mt-0 px-4 py-1 text-white text-sm rounded-md bg-[#F2277E]">
                           3 questions
                         </p>
                       </div>
                     </div>
-                    <div className="w-full flex justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
+                    <div className="w-full flex flex-col items-start lg:flex-row justify-between border-b py-4 hover:bg-gray-100 duration-300 rounded-sm px-1">
                       <div className="flex items-center text-sm">
                         <AiOutlineFileText />
                         <p className="font-bold ml-2">Reading :</p>
                         <p className="ml-1">Ut enim ad minim veniam</p>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm">
+                      <div className="flex flex-col lg:flex-row mt-3 lg:mt-0 items-center space-x-2 text-sm">
                         <div className="flex items-center space-x-1">
                           <CiClock2 size={22} />
                           <p>22 minutes</p>
@@ -528,14 +530,16 @@ const page = () => {
                 </p>
                 <div className="w-full grid grid-cols-6 gap-1 mt-3">
                   <div className="col-span-2 flex flex-col items-center justify-center py-12 bg-gray-200">
-                    <p className="text-8xl font-semibold">{averageRaiting ? averageRaiting.toFixed(1) : '5'}</p>
+                    <p className="text-4xl lg:text-8xl font-semibold">
+                      {averageRaiting ? averageRaiting.toFixed(1) : "5"}
+                    </p>
                     <Rating
                       size={20}
                       readonly={true}
                       SVGstyle={{ display: "inline" }}
-                      initialValue={4.5}
+                      initialValue={averageRaiting ? averageRaiting.toFixed(1) : "5"}
                     />
-                    <p className="text-gray-400 mt-1">2 Raitings</p>
+                    <p className="text-xs lg:text-base text-gray-400 mt-1">2 Raitings</p>
                   </div>
                   <div className="col-span-4 px-10 py-10 bg-gray-200 text-sm">
                     <p className="font-semibold">Detailed Rating</p>
@@ -594,7 +598,7 @@ const page = () => {
                       />
                     </div>
                     <p className="text-xs text-gray-400">July 14, 2023</p>
-                    <p className="text-gray-600 mt-4">
+                    <p className="text-sm lg:text-base text-gray-600 mt-4">
                       So I said lurgy dropped a clanger Jeffrey bugger cuppa
                       gosh David blatant have it, standard A bit of how's your
                       father my lady absolutely.
@@ -617,7 +621,7 @@ const page = () => {
                       />
                     </div>
                     <p className="text-xs text-gray-400">July 17, 2023</p>
-                    <p className="text-gray-600 mt-4">
+                    <p className="text-sm lg:text-base text-gray-600 mt-4">
                       So I said lurgy dropped a clanger Jeffrey bugger cuppa
                       gosh David blatant have it, standard A bit of how's your
                       father my lady absolutely.
@@ -642,11 +646,9 @@ const page = () => {
                       </div>
                       <p className="text-xs text-gray-400">{item.date}</p>
                       <p className="text-gray-600 font-bold text-sm mt-4">
-                       {item.comment}
+                        {item.title}
                       </p>
-                      <p className="text-gray-600 mt-1">
-                       {item.comment}
-                      </p>
+                      <p className="text-xs lg:text-base text-gray-600 mt-1">{item.comment}</p>
                     </div>
                   </div>
                 ))}
@@ -722,7 +724,7 @@ const page = () => {
             )}
           </div>
         </div>
-        <div className="col-span-2 border rounded-lg shadow-lg py-20 px-5">
+        <div className="col-span-5 lg:col-span-2 border rounded-lg shadow-lg py-20 px-5">
           <div className="w-full h-60">
             <img
               className="w-full h-full object-contain"

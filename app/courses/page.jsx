@@ -5,24 +5,32 @@ import { CiBoxList } from "react-icons/ci";
 import { IoSearch } from "react-icons/io5";
 import CourseCard from "../components/Cards/CourseCard";
 import coursesData from "@/coursesData";
-import axios from "axios"
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 const page = () => {
- const courses = coursesData
+  const courses = coursesData;
 
- const [data, setData] = useState();
+  const [data, setData] = useState();
 
   const getData = async () => {
     try {
-      const response = await axios.get("https://educal-api.onrender.com/courses");
-      setData(response.data)
+      const response = await axios.get(
+        "https://educal-api.onrender.com/courses"
+      );
+      setData(response.data);
     } catch (error) {
       console.log("error", error);
     }
   };
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
   const categories = [
@@ -96,7 +104,7 @@ const page = () => {
         </div>
       </div>
       <div className="container mx-auto">
-        <div className="grid grid-cols-8 gap-x-10 justify-between items-center py-5">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-x-10 justify-between items-center lg:py-5">
           <div className="col-span-6 h-16 px-8 rounded-sm bg-gray-200 flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-7 h-7 bg-blue-600 rounded-[3px] flex justify-center items-center">
@@ -125,13 +133,76 @@ const page = () => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-8 gap-x-10 justify-between items-start py-5">
-          <div className="col-span-6 grid grid-cols-3 gap-5">
-          {data?.courses.map((item, index) => (
-            <CourseCard key={index} item={item} categories={data.categories} />
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-x-10 justify-between items-start py-5">
+          <div className="grid grid-cols-2 lg:hidden pt-10 pb-5  bg-gray-300">
+            <div className="w-full pl-7 border-b-2 border-white pb-10">
+              <p className="text-lg font-bold mb-5">Categories</p>
+              {categories.map((item) => (
+                <div key={item.id} className="flex items-center space-x-3 mb-3">
+                  <input type="checkbox" className="w-4 h-4 text-blue-600" />
+                  <p className="text-sm text-gray-600">{item.title}</p>
+                </div>
+              ))}
+            </div>
+            <div className="w-full pl-7 border-b-2 border-white py-10">
+              <p className="text-lg font-bold mb-5">Skill Level</p>
+              {skillLevel.map((item) => (
+                <div key={item.id} className="flex items-center space-x-3 mb-3">
+                  <input type="checkbox" className="w-4 h-4 text-blue-600" />
+                  <p className="text-sm text-gray-600">{item.title}</p>
+                </div>
+              ))}
+            </div>
+            <div className="w-full pl-7 border-b-2 border-white py-10">
+              <p className="text-lg font-bold mb-5">Price Filter</p>
+              {priceFilter.map((item) => (
+                <div key={item.id} className="flex items-center space-x-3 mb-3">
+                  <input type="checkbox" className="w-4 h-4 text-blue-600" />
+                  <p className="text-sm text-gray-600">{item.title}</p>
+                </div>
+              ))}
+            </div>
+            <div className="w-full flex justify-center items-end pb-2">
+              <button className="bg-blue-500 text-white w-44 h-12 mt-5 rounded-sm">
+                Filter
+              </button>
+            </div>
           </div>
-          <div className="col-span-2 pt-10 pb-5 bg-gray-200">
+
+          <div className="col-span-6 grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-3 gap-5">
+            <div className="w-full block lg:hidden py-5">
+              <Swiper
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                spaceBetween={50}
+                slidesPerView={1}
+                // navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSlideChange={() => console.log("slide change")}
+                onSwiper={(swiper) => console.log(swiper)}
+              >
+                {data?.courses.map((item, index) => (
+                  <SwiperSlide>
+                    <CourseCard
+                      key={index}
+                      item={item}
+                      categories={data.categories}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            <div className="col-span-6 lg:grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-3 gap-5 hidden">
+              {data?.courses.map((item, index) => (
+                <CourseCard
+                  key={index}
+                  item={item}
+                  categories={data.categories}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="hidden lg:block col-span-2 pt-10 pb-5 bg-gray-200">
             <div className="w-full pl-7 border-b-2 border-white pb-10">
               <p className="text-lg font-bold mb-5">Categories</p>
               {categories.map((item) => (
@@ -160,7 +231,9 @@ const page = () => {
               ))}
             </div>
             <div className="w-full flex justify-center">
-            <button className="bg-blue-500 text-white w-2/3 h-12 mt-5 rounded-sm">Filter</button>
+              <button className="bg-blue-500 text-white w-2/3 h-12 mt-5 rounded-sm">
+                Filter
+              </button>
             </div>
           </div>
         </div>

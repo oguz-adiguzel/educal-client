@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const TeacherCard = ({ item }) => {
   const router = useRouter();
   return (
-    <div className="border flex flex-col items-center bg-gray-200 py-9 group hover:bg-white duration-500 rounded-md">
+    <div className="mt-5 lg:mt-0 border flex flex-col items-center bg-gray-200 py-9 group hover:bg-white duration-500 rounded-md">
       <div
         onClick={() => router.push(`teacherDetail/${item.slug}`)}
         className="w-80 overflow-hidden cursor-pointer"

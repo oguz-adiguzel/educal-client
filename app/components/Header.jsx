@@ -7,8 +7,9 @@ import { TiTimes } from "react-icons/ti";
 import { BsPlus } from "react-icons/bs";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import axios from "axios"
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Accordion, AccordionTab } from "primereact/accordion";
 
 const Header = () => {
   const router = useRouter();
@@ -85,11 +86,11 @@ const Header = () => {
   ];
 
   const [mobileToggle, setMobileToggle] = useState(false);
-  const [categoryData, setCategoryData] = useState()
+  const [categoryData, setCategoryData] = useState();
 
   // const token = localStorage.getItem("tokenKey");
 
-  const token = Cookies.get('tokenKey')
+  const token = Cookies.get("tokenKey");
 
   useEffect(() => {
     const handleWheelDisable = (e) => {
@@ -110,19 +111,18 @@ const Header = () => {
   }, [mobileToggle]);
 
   useEffect(() => {
-   getCategories()
-  }, [])
-  
+    getCategories();
+  }, []);
 
   const path = usePathname();
 
   const logOut = () => {
     // localStorage.removeItem("tokenKey");
-    Cookies.remove("tokenKey")
+    Cookies.remove("tokenKey");
     // localStorage.removeItem("role");
-    Cookies.remove("role")
+    Cookies.remove("role");
     // localStorage.removeItem("userData");
-    Cookies.remove("userData")
+    Cookies.remove("userData");
     router.push("/signin");
     toast.warn("Çıkış yapıldı", {
       position: "top-right",
@@ -136,14 +136,16 @@ const Header = () => {
     });
   };
 
-  const getCategories = async() =>{
-    try{
-      const response = await axios.get('https://educal-api.onrender.com/categories/getCategories')
-      setCategoryData(response.data.categories)
-    }catch(error){
-      console.log('error', error);
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        "https://educal-api.onrender.com/categories/getCategories"
+      );
+      setCategoryData(response.data.categories);
+    } catch (error) {
+      console.log("error", error);
     }
-  }
+  };
 
   return (
     <div className=" py-5 lg:flex lg:justify-between lg:items-center px-4 lg:px-0 container mx-auto absolute left-0 right-0">
@@ -163,23 +165,117 @@ const Header = () => {
                 <TiTimes size={22} color="gray" />
               </div>
             </div>
-            <div className="w-full px-7 mt-10">
-              {nav.map((item, index) => (
-                <div
-                  key={index}
-                  className="border-b py-2 flex justify-between items-center group"
+            <div className="w-full flex justify-center space-x-3 py-4 mt-5">
+              {!token && (
+                <button
+                  onClick={() => {
+                    router.push("/signup");
+                    setMobileToggle(!mobileToggle);
+                  }}
+                  className="bg-[#2b4eff] px-4 h-12 rounded-md text-sm text-white hover:shadow-xl duration-300"
                 >
-                  <p
-                    onClick={() => router.push(`${item.path}`)}
-                    className="uppercase text-xs font-bold text-gray-500 group-hover:tracking-widest group-hover:text-blue-500	duration-300"
+                  Try for free
+                </button>
+              )}
+              {token ? (
+                <button
+                  onClick={() => {
+                    logOut();
+                    setMobileToggle(!mobileToggle);
+                  }}
+                  className="px-3 bg-red-500 text-sm text-white rounded-md"
+                >
+                  Çıkış
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    router.push("/signin");
+                    setMobileToggle(!mobileToggle);
+                  }}
+                  className="px-3 bg-[#2b4eff] text-sm text-white rounded-md"
+                >
+                  Login
+                </button>
+              )}
+            </div>
+            <div className="w-full px-7 mt-10">
+              {nav
+                .filter((item) => item.title !== "Pages")
+                .map((item, index) => (
+                  <div
+                    key={index}
+                    className="border-b py-2 flex justify-between items-center group"
                   >
-                    {item.title}
-                  </p>
-                  <div className="border-l px-2">
-                    <BsPlus size={26} />
+                    <p
+                      onClick={() => {
+                        router.push(`${item.path}`);
+                        setMobileToggle(!mobileToggle);
+                      }}
+                      className="uppercase text-xs font-bold text-gray-500 group-hover:tracking-widest group-hover:text-blue-500	duration-300"
+                    >
+                      {item.title}
+                    </p>
+                    <div className="border-l px-2">
+                      <BsPlus size={26} />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              <Accordion>
+                <AccordionTab
+                  header={
+                    <div
+                      // key={index}
+                      className="border-b py-2 flex justify-between items-center group"
+                    >
+                      <p
+                        // onClick={() => router.push(`${item.path}`)}
+                        className="uppercase text-xs font-bold text-gray-500 group-hover:tracking-widest group-hover:text-blue-500	duration-300"
+                      >
+                        pages
+                      </p>
+                      <div className="border-l px-2">
+                        <BsPlus size={26} />
+                      </div>
+                    </div>
+                  }
+                >
+                  {token
+                    ? pages.map((item, index) => (
+                        <div
+                          key={index}
+                          onClick={() => {
+                            router.push(`${item.path}`);
+                            setMobileToggle(!mobileToggle);
+                          }}
+                          className="w-full pages-link group my-1 pl-3"
+                        >
+                          <p
+                            key={item.id}
+                            className="text-gray-500 mt-1.5 py-3 w-full cursor-pointer relative z-50"
+                          >
+                            {item.title}
+                          </p>
+                        </div>
+                      ))
+                    : pages
+                        .filter((p) => p.title !== "Dashboard")
+                        .map((item, index) => (
+                          <div
+                            key={index}
+                            onClick={() => router.push(`${item.path}`)}
+                            className="w-full pages-link group my-1 pl-3"
+                          >
+                            <p
+                              key={item.id}
+                              className="text-gray-500 mt-1.5 py-3 w-full cursor-pointer relative z-50"
+                            >
+                              {item.title}
+                            </p>
+                          </div>
+                        ))}
+                </AccordionTab>
+              </Accordion>
             </div>
             <div className="relative mt-7 w-4/5 mx-auto flex justify-center">
               <span className="absolute top-3 left-2">
@@ -307,12 +403,14 @@ const Header = () => {
             placeholder="Search..."
           />
         </div>
-        {!token && <button
-          onClick={() => router.push("/signup")}
-          className="bg-[#2b4eff] px-4 h-12 rounded-md text-sm text-white hover:shadow-xl duration-300"
-        >
-          Try for free
-        </button>}
+        {!token && (
+          <button
+            onClick={() => router.push("/signup")}
+            className="bg-[#2b4eff] px-4 h-12 rounded-md text-sm text-white hover:shadow-xl duration-300"
+          >
+            Try for free
+          </button>
+        )}
         {token ? (
           <button
             onClick={() => logOut()}

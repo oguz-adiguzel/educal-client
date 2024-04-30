@@ -35,7 +35,7 @@ const page = () => {
           You don't have to struggle alone, you've got our assistance and help.
         </p>
       </div>
-      <div className="container mx-auto grid grid-cols-3 gap-10 px-32 pb-20">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 lg:gap-10 lg:px-32 pb-20">
         {teacherList?.map((item) => (
           <TeacherCard item={item}/>
         ))}

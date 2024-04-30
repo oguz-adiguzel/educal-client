@@ -32,7 +32,7 @@ const page = () => {
           <p className="text-white mt-2">Home . Contact</p>
         </div>
       </div>
-      <div className="container mx-auto grid grid-cols-2 py-32 pl-36">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 py-10 lg:py-32 lg:pl-36">
         <div className="flex flex-col items-start px-10">
           <div>
             <p className="text-4xl font-bold">Get Intouch</p>
@@ -88,7 +88,7 @@ const page = () => {
             className="absolute right-0 bottom-44"
             src="contact-shape-3.png"
           />
-          <div className="w-1/2 pl-7 pr-8 py-20 bg-white shadow-md">
+          <div className="w-2/3 mt-10 lg:mt-0 lg:w-1/2 pl-7 pr-8 py-20 bg-white shadow-md">
             <div className="flex items-center space-x-2">
               <CiLocationOn size={22} color="blue" />
               <p className="text-lg font-semibold">New York Office</p>

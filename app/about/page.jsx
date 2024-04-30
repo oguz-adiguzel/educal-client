@@ -50,14 +50,14 @@ const page = () => {
           <p className="text-white mt-2">Home . About</p>
         </div>
       </div>
-      <div className="container mx-auto grid grid-cols-2 gap-x-28">
-        <div className="relative flex justify-end py-36">
-          <img className="w-1/2 rounded-md" src="about.jpg" />
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-x-28">
+        <div className="relative flex justify-center lg:justify-end py-36">
+          <img className="w-[90%] lg:w-1/2 rounded-md" src="about.jpg" />
           <img
-            className="w-56 rounded-md absolute bottom-14 right-64"
+            className="hidden lg:block w-56 rounded-md absolute lg:bottom-14 lg:right-64"
             src="about-banner.jpg"
           />
-          <div className="absolute bottom-16 right-10 ">
+          <div className="absolute bottom-16 lg:right-10 ">
             <div className="flex -space-x-3">
               {student.map((item) => (
                 <img
@@ -76,7 +76,7 @@ const page = () => {
         <div className="flex flex-col justify-center items-start">
           <h1 className="text-4xl font-bold">Achieve Your</h1>
           <h1 className="text-4xl font-bold">Goals With Educal</h1>
-          <p className="text-sm text-gray-400 pr-96 mt-4">
+          <p className="text-sm text-gray-400 lg:pr-96 mt-4">
             Lost the plot bobby such a fibber bleeding bits and bobs don't get
             shirty with me bugger all mate chinwag super pukka william barney,
             horse play buggered.
@@ -101,17 +101,16 @@ const page = () => {
       <p className="text-center font-bold text-xl mt-16">
         Trusted by 100 world's best companies
       </p>
-      <div className="container mx-auto flex justify-around px-20 mt-10">
+      <div className="w-full lg:container mx-auto flex justify-around lg:px-20 mt-10">
         <img src="brand-1.png" />
         <img src="brand-2.png" />
         <img src="brand-3.png" />
         <img src="brand-4.png" />
         <img src="brand-5.png" />
-        <img src="brand-1.png" />
       </div>
       <div className="w-full h-[780px] about-section mt-36">
-        <div className="container mx-auto grid grid-cols-2 py-32">
-          <div className="pl-40 pt-10">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 py-32">
+          <div className="lg:pl-40 pt-10">
             <p className="text-4xl font-bold text-white">Student</p>
             <p className="text-4xl font-bold text-white">Community Feedback</p>
             <p className="text-xl text-white mt-3">
@@ -132,7 +131,7 @@ const page = () => {
               ))}
             </div>
           </div>
-          <div className="pl-40">
+          <div className="hidden lg:block lg:pl-40">
             <YouTube videoId="y9LkICwfpF0" opts={opts} onReady={onReady} />
             <div className="w-[550px] py-10 bg-white flex justify-center items-center space-x-5">
               <div className="bg-[#0fa0dd] w-16 h-16 rounded-full flex justify-center items-center">
@@ -149,7 +148,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto grid grid-cols-2 px-40 py-32">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 lg:px-40 py-32">
         <div className="flex flex-col justify-center px-20">
           <p className=" text-blue-400 font-semibold">Why Choses Me</p>
           <p className="text-4xl font-bold mt-2">Tools For Teachers And</p>
@@ -182,7 +181,7 @@ const page = () => {
         <p className="text-gray-500 text-center mt-2">
           You don't have to struggle alone, you've got our assistance and help.
         </p>
-        <div className="flex justify-around px-32 mt-14">
+        <div className="flex justify-around lg:px-32 mt-14">
           <div>
             <PiUsersThreeLight color="#fc4d93" size={36} />
             <p className="text-xl font-bold mt-2">345421</p>
