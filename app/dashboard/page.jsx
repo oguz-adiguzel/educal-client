@@ -336,7 +336,7 @@ useEffect(() => {
                   onChange={(e) => setVideo(e.target.value)}
                   className="w-full py-6 pl-5 bg-gray-100 rounded-md text-xs mt-2"
                   type="text"
-                  placeholder="Course Name"
+                  placeholder="Youtube Video Id"
                 />
               </div>
             </div>

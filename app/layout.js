@@ -6,8 +6,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { IntlProvider } from "react-intl";
 import { PrimeReactProvider } from "primereact/api";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,15 +18,17 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
   return (
     <html lang="en">
       <ToastContainer />
       <body className={inter.className}>
         <PrimeReactProvider>
           <IntlProvider locale="tr">
-            <Header />
-            {children}
-            <Footer />
+              {pathname !== "/adminPanel" && <Header />}
+              {children}
+              {pathname !== "/adminPanel" && <Footer />}
           </IntlProvider>
         </PrimeReactProvider>
       </body>

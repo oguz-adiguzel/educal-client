@@ -75,6 +75,38 @@ body {
   background-size: cover;
 }
 
+.blog-title{
+  height: 500px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/blog-bg.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.blog-detail-title{
+  height: 700px;
+  background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url(../public/blog-detail.jpg);
+  /* background-image: url('../public/page-title-2.jpg'); */
+  background-position: 0% 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .teacher-detail{
   height: 500px;
   background:

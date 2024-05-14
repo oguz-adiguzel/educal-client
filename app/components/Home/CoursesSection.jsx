@@ -20,8 +20,6 @@ const CoursesSection = () => {
     getData()
   }, []);
 
-  console.log('data', data);
-
   return (
     <div className="w-full py-20 lg:py-32">
       <div className="w-full lg:container mx-auto px-3 lg:px-32">
