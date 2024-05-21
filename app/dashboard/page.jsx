@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../middleware/useAuth";
 import axios from "axios";
@@ -24,7 +23,7 @@ const page = () => {
   const [userModal, setUserModal] = useState(false);
   const [name, setName] = useState();
   const [userName, setUserName] = useState()
-  const [password, setPassword] = useState()
+  // const [password, setPassword] = useState()
   const [location, setLocation] = useState()
   const [date, setDate] = useState()
   const [desc, setDesc] = useState();
