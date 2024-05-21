@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import dynamic from 'next/dynamic';
 import { useAuth } from "../middleware/useAuth";
 import axios from "axios";
 import { FaLinkedin } from "react-icons/fa";
