@@ -1,14 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBloggerB, FaImage } from "react-icons/fa";
 import { MdDashboard, MdOutlineCategory } from "react-icons/md";
 import Dashboard from "../components/Admin/Dashboard";
 import BlogMng from "../components/Admin/BlogMng";
 import CategoryMng from "../components/Admin/CategoryMng";
 import MainMng from "../components/Admin/MainMng";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [component, setComponent] = useState("dashboard");
+  const router = useRouter();
+
+  useEffect(() => {
+    // const token = localStorage.getItem('tokenKey');
+    const user = Cookies.get("role")
+
+    if (user !== 'admin') {
+      router.push('/');
+    }
+  }, []);
 
   return (
     <div className="w-full h-screen">

@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Accordion, AccordionTab } from "primereact/accordion";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Header = () => {
   const router = useRouter();
@@ -91,6 +93,7 @@ const Header = () => {
   // const token = localStorage.getItem("tokenKey");
 
   const token = Cookies.get("tokenKey");
+  const role = Cookies.get("role");
 
   useEffect(() => {
     const handleWheelDisable = (e) => {
@@ -196,6 +199,17 @@ const Header = () => {
                   className="px-3 bg-[#2b4eff] text-sm text-white rounded-md"
                 >
                   Login
+                </button>
+              )}
+              {role === "admin" && (
+                <button
+                  onClick={() => {
+                    router.push("/adminPanel");
+                    setMobileToggle(!mobileToggle);
+                  }}
+                  className="px-3 bg-gray-600 text-sm text-white rounded-md"
+                >
+                  Panel
                 </button>
               )}
             </div>
@@ -329,14 +343,18 @@ const Header = () => {
             Category
           </p>
           <div className="w-52 bg-white py-3 absolute top-7 cursor-default shadow-md invisible group-hover:visible translate-y-4 group-hover:translate-y-0 duration-200">
-            {categoryData?.map((item, index) => (
-              <p
-                key={index}
-                className="text-gray-500 ml-8 mt-1.5 cursor-pointer hover:text-[#2B4EFF]"
-              >
-                {item.name}
-              </p>
-            ))}
+            {categoryData ? (
+              categoryData?.map((item, index) => (
+                <p
+                  key={index}
+                  className="text-gray-500 ml-8 mt-1.5 cursor-pointer hover:text-[#2B4EFF]"
+                >
+                  {item.name}
+                </p>
+              ))
+            ) : (
+              <Skeleton height={30} className="mx-auto" count={6} />
+            )}
           </div>
         </div>
       </div>
@@ -432,6 +450,16 @@ const Header = () => {
         >
           Login
         </button> */}
+        {role === "admin" && (
+          <button
+            onClick={() => {
+              router.push("/adminPanel");
+            }}
+            className="px-3 bg-gray-600 text-sm text-white rounded-md"
+          >
+            Panel
+          </button>
+        )}
       </div>
     </div>
   );

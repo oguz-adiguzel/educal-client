@@ -3,18 +3,19 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { CiMail, CiLock } from "react-icons/ci";
-import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { isMobile } from "react-device-detect";
 
 const page = () => {
   const router = useRouter();
 
   useEffect(() => {
     // const token = localStorage.getItem('tokenKey');
-    const token = Cookies.get("tokenKey")
+    const token = Cookies.get("tokenKey");
 
     if (token) {
-      router.push('/');
+      router.push("/");
     }
   }, []);
 
@@ -22,31 +23,66 @@ const page = () => {
   const [password, setPassword] = useState();
 
   const login = async () => {
-
     try {
-      const response = await axios.post("https://educal-api.onrender.com/users/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://educal-api.onrender.com/users/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
-      if(response){
-        Cookies.set('tokenKey', response.data.token)
-        Cookies.set('role', response.data.role)
-        Cookies.set('userData', JSON.stringify(response.data.user))
-        // localStorage.setItem('tokenKey', response.data.token)
-        // localStorage.setItem('role', response.data.role)
-        // localStorage.setItem('userData', JSON.stringify(response.data.user))
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          })
-          router.push('dashboard')
+      if (response) {
+        if (response.data.role === "admin") {
+          if (isMobile) {
+            toast.warn("Mobil cihaz ile admin girişi yapılamaz", {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else {
+            Cookies.set("tokenKey", response.data.token);
+            Cookies.set("role", response.data.role);
+            Cookies.set("userData", JSON.stringify(response.data.user));
+            toast.success(response.data.message, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            router.push("adminPanel");
+          }
+        } else {
+          Cookies.set("tokenKey", response.data.token);
+          Cookies.set("role", response.data.role);
+          Cookies.set("userData", JSON.stringify(response.data.user));
+
+          toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          const role = Cookies.get("role");
+          if (role === "admin") {
+            router.push("adminPanel");
+          } else {
+            router.push("dashboard");
+          }
+        }
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -58,7 +94,7 @@ const page = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        })
+      });
     }
   };
 
@@ -67,7 +103,9 @@ const page = () => {
       <title>Educal - Instructor</title>
       <div className="w-full login-title flex items-center">
         <div className="container mx-auto">
-          <h1 className="text-white pl-5 lg:pl-0 text-6xl font-bold mt-2">Login Account</h1>
+          <h1 className="text-white pl-5 lg:pl-0 text-6xl font-bold mt-2">
+            Login Account
+          </h1>
           <p className="text-white mt-2 pl-5 lg:pl-0 ">Home . Signin</p>
         </div>
       </div>
@@ -77,14 +115,32 @@ const page = () => {
         it you don't have an account you can Register here!
       </p>
       <div className="w-full relative">
-        <img className="absolute hidden lg:block top-60 left-96 " src="man-3.png" />
-        <img className="absolute top-60 right-96 hidden lg:block" src="man-2.png" />
-        <img className="absolute lg:-z-10 lg:left-1/3 lg:-top-10 " src="sign-up.png" />
+        <img
+          className="absolute hidden lg:block top-60 left-96 "
+          src="man-3.png"
+        />
+        <img
+          className="absolute top-60 right-96 hidden lg:block"
+          src="man-2.png"
+        />
+        <img
+          className="absolute lg:-z-10 lg:left-1/3 lg:-top-10 "
+          src="sign-up.png"
+        />
       </div>
       <div className="w-[90%] lg:w-[30%] mt-12 mb-20 rounded-md shadow-md mx-auto py-16 bg-white relative">
-        <img className="absolute bottom-40 -right-32 hidden lg:block" src="flower.png" />
-        <img className="absolute -right-24 animate-spin  hidden lg:block" src="circle.png" />
-        <img className="absolute top-10 -right-10 element  hidden lg:block" src="dot.png" />
+        <img
+          className="absolute bottom-40 -right-32 hidden lg:block"
+          src="flower.png"
+        />
+        <img
+          className="absolute -right-24 animate-spin  hidden lg:block"
+          src="circle.png"
+        />
+        <img
+          className="absolute top-10 -right-10 element  hidden lg:block"
+          src="dot.png"
+        />
         <img
           className="absolute hidden lg:block top-20 -left-32 animate-bounce "
           src="zigzag.png"

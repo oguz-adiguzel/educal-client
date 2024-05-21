@@ -20,6 +20,9 @@ import { Accordion, AccordionTab } from "primereact/accordion";
 import { toast } from "react-toastify";
 import YouTube from "react-youtube";
 import Cookies from "js-cookie";
+import DOMPurify from "dompurify";
+import parse from 'html-react-parser';
+
 
 const page = () => {
   // const data = coursesData;
@@ -31,6 +34,7 @@ const page = () => {
   const [comment, setComment] = useState();
   const [raiting, setRaiting] = useState();
   const [averageRaiting, setAverageRaiting] = useState();
+  const [cleanText, setCleanText] = useState()
   // const token = localStorage.getItem("tokenKey");
   const token = Cookies.get("tokenKey");
   // const role = localStorage.getItem("role");
@@ -249,7 +253,13 @@ const page = () => {
 
   useEffect(() => {
     raitingCount();
+    cleanDesc()
   }, [data]);
+
+  const cleanDesc = () => {
+    const cleanHTML = DOMPurify.sanitize(data?.course?.description);
+    setCleanText(cleanHTML);
+  };
 
   return (
     <div className="w-full">
@@ -348,7 +358,7 @@ const page = () => {
                 {" "}
                 <p className="text-2xl font-semibold">Course Overview</p>
                 <p className="mt-3 text-gray-400">
-                  {data?.course?.description}
+                  {cleanText ? parse(cleanText) : 'Yükleniyor...'}
                 </p>
                 <div className="flex items-center space-x-2 mt-6">
                   <GoTag color="blue" />

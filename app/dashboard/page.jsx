@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import CourseCard from "../components/Cards/CourseCard";
 import Cookies from "js-cookie";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const page = () => {
   const [userData, setUserData] = useState();
@@ -320,13 +322,14 @@ useEffect(() => {
                 />
               </div>
             </div>
-            <div className="w-2/3 mx-auto mt-8">
+            <div className="w-2/3 h-auto mx-auto mt-8">
               <p className="font-semibold">Description</p>
               <div className="relative">
-                <textarea
+              <ReactQuill theme="snow" value={desc} onChange={setDesc} />
+                {/* <textarea
                   onChange={(e) => setDesc(e.target.value)}
                   className="w-full h-40 pl-10 bg-gray-100 rounded-md text-xs mt-2 whitespace-pre"
-                ></textarea>
+                ></textarea> */}
               </div>
             </div>
             <div className="w-2/3 mx-auto">
