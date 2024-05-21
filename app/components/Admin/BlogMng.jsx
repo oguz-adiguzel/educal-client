@@ -1,31 +1,28 @@
 'use client'
 import axios from "axios";
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from "react";
 import BlogCard from "../Cards/BlogCard";
 import { CiImageOn } from "react-icons/ci";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+  ssr: false,
+});
 
 const BlogMng = () => {
   const [blogData, setBlogData] = useState();
   const [popup, setPopup] = useState(false);
-
   const [title, setTitle] = useState();
-  const [blogText, setBlogText] = useState();
+  // const [blogText, setBlogText] = useState();
   const [tag, setTag] = useState();
   const [photo, setPhoto] = useState();
 
   const [value, setValue] = useState("");
-
-  const editor = React.useRef(null);
-  function focusEditor() {
-    editor.current.focus();
-  }
-
-  console.log("state", value);
 
   const getData = async () => {
     try {

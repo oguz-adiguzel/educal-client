@@ -11,8 +11,12 @@ import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import CourseCard from "../components/Cards/CourseCard";
 import Cookies from "js-cookie";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+  ssr: false,
+});
 
 const page = () => {
   const [userData, setUserData] = useState();
