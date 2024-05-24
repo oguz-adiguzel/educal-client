@@ -23,7 +23,8 @@ const page = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen relative">
+      <button onClick={()=> router.push('/')} className="bg-blue-500 absolute top-6 right-10 text-sm text-white font-semibold px-5 py-2 rounded-md">Website</button>
       {/* <div className="w-full py-5 bg-[#2A3042] pl-10">
         <img src="logo-2.png" />
       </div> */}
