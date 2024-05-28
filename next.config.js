@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    serverMinification: true,
-}
+const nextConfig = {}
 
 module.exports = nextConfig
