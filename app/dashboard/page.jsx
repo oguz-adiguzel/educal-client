@@ -110,7 +110,7 @@ const page = () => {
   const openModal = async () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Düzgün animasyon ile kaydırma
+      behavior: "smooth", 
     });
     setModal(!modal);
     // await getCategory();
@@ -118,7 +118,7 @@ const page = () => {
   const openUserModal = async () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Düzgün animasyon ile kaydırma
+      behavior: "smooth",
     });
     setUserModal(!userModal);
     // await getCategory();

@@ -6,8 +6,6 @@ const MainSection = () => {
 
   const [photos, setPhotos] = useState()
 
-  console.log('photos', photos);
-
   const getPhoto = async() =>{
     try {
       const response = await axios.get(
