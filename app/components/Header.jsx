@@ -374,7 +374,7 @@ const Header = () => {
                 {item.title}
               </li>
               <div className="w-52 bg-white py-3 px-3 absolute top-16 z-50 cursor-default shadow-md invisible group-hover:visible translate-y-4 group-hover:translate-y-0 duration-200">
-                {token
+                {token && role !== 'admin'
                   ? pages.map((item, index) => (
                       <div
                         key={index}

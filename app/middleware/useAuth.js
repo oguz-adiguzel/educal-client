@@ -9,9 +9,10 @@ export const useAuth = () => {
     // localStorage'dan token'ı al
     // const token = localStorage.getItem('tokenKey');
     const token = Cookies.get("tokenKey")
+    const role = Cookies.get("role")
 
     // Eğer token yoksa ana sayfaya yönlendir
-    if (!token) {
+    if (!token || role === 'admin') {
       router.push('/');
     }
   }, []);
