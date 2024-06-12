@@ -178,8 +178,6 @@ const page = () => {
                 // navigation
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
               >
                 {data?.courses.map((item, index) => (
                   <SwiperSlide>

@@ -17,7 +17,6 @@ const page = () => {
         email:email,
         message:message
       })
-      console.log('res', response);
     }catch(error){
 
     }

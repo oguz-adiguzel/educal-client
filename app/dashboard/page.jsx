@@ -192,7 +192,6 @@ const page = () => {
       // Eğer id daha önce görülmüşse, bu nesneyi sonuca dahil etmeyin
       return false;
     });
-    console.log('sonuc', sonuc);
     return sonuc;
   };
 
@@ -459,6 +458,7 @@ useEffect(() => {
               categories={categories}
               teacher={userData.name}
               teacherPhoto={userData.photoUrl}
+              page={'teacherDashboard'}
             />
           ))}
           {role === "student" &&

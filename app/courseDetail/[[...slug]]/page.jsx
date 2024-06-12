@@ -47,6 +47,8 @@ const page = () => {
 
   const onPointerMove = (value, index) => setRaiting(value);
 
+  console.log('data', data);
+
   const getCourse = async () => {
     try {
       const response = await axios.get(

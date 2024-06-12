@@ -26,7 +26,6 @@ const CategoryMng = () => {
         "https://educal-api.onrender.com/categories",
         { name: inputText }
       );
-      console.log("res", response);
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,

@@ -65,7 +65,7 @@ const CoursesSection = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-16 mt-16">
           {data ?  catFilter === undefined && (
-            data?.courses.map((item, index) => (
+            data?.courses.filter((item)=> item.confirmCourse === true).map((item, index) => (
               <CourseCard
                 key={index}
                 item={item}
@@ -83,7 +83,7 @@ const CoursesSection = () => {
             </div>
           )}
           {data ? (
-            data?.courses
+            data?.courses.filter((item)=> item.confirmCourse === true)
               .filter((item) => item.category === catFilter)
               .map((item, index) => (
                 <CourseCard

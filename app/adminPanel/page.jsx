@@ -8,6 +8,8 @@ import CategoryMng from "../components/Admin/CategoryMng";
 import MainMng from "../components/Admin/MainMng";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { SiCoursera } from "react-icons/si";
+import CourseMng from "../components/Admin/CourseMng";
 
 const page = () => {
   const [component, setComponent] = useState("dashboard");
@@ -24,7 +26,10 @@ const page = () => {
 
   return (
     <div className="w-full h-screen relative">
-      <button onClick={()=> router.push('/')} className="bg-blue-500 absolute top-6 right-10 text-sm text-white font-semibold px-5 py-2 rounded-md">Website</button>
+      {
+        component !== 'blog' && <button onClick={()=> router.push('/')} className="bg-blue-500 absolute top-6 right-10 text-sm text-white font-semibold px-5 py-2 rounded-md">Website</button>
+      }
+      
       {/* <div className="w-full py-5 bg-[#2A3042] pl-10">
         <img src="logo-2.png" />
       </div> */}
@@ -59,12 +64,20 @@ const page = () => {
             <FaImage size={22} />
             <p>Main Section Management</p>
           </div>
+          <div
+            onClick={() => setComponent("course")}
+            className="flex items-center text-gray-300 space-x-2 hover:bg-[#373b47] py-3 w-full pl-5 mt-5 cursor-pointer"
+          >
+            <SiCoursera size={22} />
+            <p>Course Management</p>
+          </div>
         </div>
         <div className="col-span-10 bg-[#222736] p-7 overflow-scroll">
           {component === "dashboard" && <Dashboard />}
           {component === "blog" && <BlogMng />}
           {component === "category" && <CategoryMng />}
           {component === "main" && <MainMng />}
+          {component === "course" && <CourseMng />}
         </div>
       </div>
     </div>

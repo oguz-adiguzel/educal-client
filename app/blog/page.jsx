@@ -21,8 +21,6 @@ const page = () => {
     getData();
   }, []);
 
-  console.log("blogData", blogData);
-
   return (
     <div className="w-full">
       <title>Educal - Blog</title>
