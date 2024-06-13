@@ -40,7 +40,7 @@ const CoursesSection = () => {
             </p>
           </div>
           <div className="px-0 lg:px-5 mt-8 lg:mt-0">
-            <ul className="grid grid-cols-4 gap-4 lg:flex lg:space-x-8 text-sm">
+            <ul className="grid grid-cols-4 gap-1 lg:flex lg:space-x-2 text-sm">
               <li
                 onClick={() => setCatFilter(undefined)}
                 className={`${
